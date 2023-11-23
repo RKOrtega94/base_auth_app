@@ -7,14 +7,6 @@ class LoginUseCase implements ILoginUseCase {
     AuthRemoteDataSource(),
   );
   @override
-  Future<Map<String, String>> call(String email, String password) async {
-    Map<String, String> res = {'res': '', 'error': ''};
-    try {
-      final token = await _repo.login(email, password);
-      res['res'] = token;
-    } catch (e) {
-      res['error'] = e.toString();
-    }
-    return res;
-  }
+  Future<String> call(String email, String password) =>
+      _repo.login(email, password);
 }
