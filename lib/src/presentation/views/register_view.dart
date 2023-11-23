@@ -1,3 +1,4 @@
+import 'package:base_auth_app/src/presentation/widgets/_widgets.dart';
 import 'package:flutter/material.dart';
 
 class RegisterView extends StatelessWidget {
@@ -6,7 +7,25 @@ class RegisterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Column(
-      children: [],
+      children: [
+        AppTextFormField(
+          labelText: 'Name',
+        ),
+        SizedBox(height: 10),
+        AppTextFormField(
+          labelText: 'Email',
+        ),
+        SizedBox(height: 10),
+        AppTextFormField(
+          labelText: 'Password',
+          isPassword: true,
+        ),
+        SizedBox(height: 10),
+        AppTextFormField(
+          labelText: 'Confirm Password',
+          isPassword: true,
+        ),
+      ],
     );
   }
 }

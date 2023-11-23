@@ -1,4 +1,5 @@
 import 'package:base_auth_app/src/core/_core.dart';
+import 'package:base_auth_app/src/data/use_cases/auth/login_use_case.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -12,7 +13,9 @@ class AuthProvider extends _$AuthProvider {
   }
 
   // Login
-  Future<void> login(String email, String password) async {}
+  Future<void> login(String email, String password) async {
+    await LoginUseCase().call(email, password);
+  }
 
   // Register
   Future<void> register(String email, String password) async {}

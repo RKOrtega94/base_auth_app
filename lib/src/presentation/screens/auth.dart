@@ -3,11 +3,18 @@ import 'package:base_auth_app/src/presentation/views/register_view.dart';
 import 'package:base_auth_app/src/presentation/widgets/shared/button.dart';
 import 'package:flutter/material.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends StatefulWidget {
   static String get routeName => '/auth';
-  final bool isLogin;
-  const AuthScreen({super.key, this.isLogin = true});
+  const AuthScreen({
+    super.key,
+  });
 
+  @override
+  State<AuthScreen> createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  bool isLogin = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,12 +38,29 @@ class AuthScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                 ),
-                if (isLogin) const LoginView() else const RegisterView(),
+                if (isLogin)
+                  LoginView(
+                    onLogin: (email, password) {},
+                  )
+                else
+                  const RegisterView(),
                 const SizedBox(height: 10),
                 SizedBox(
                   width: double.infinity,
                   child: AppButtonWidget(
                     label: isLogin ? 'Login' : 'Register',
+                  ),
+                ),
+                const SizedBox(height: 10),
+                TextButton(
+                  onPressed: () => setState(() => isLogin = !isLogin),
+                  child: Text(
+                    isLogin
+                        ? 'Don\'t have an account? Register'
+                        : 'Already have an account? Login',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
                   ),
                 ),
               ],
