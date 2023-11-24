@@ -5,11 +5,13 @@ class AppTextFormField extends StatelessWidget {
   final String? labelText;
   final bool? isPassword;
   final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
   const AppTextFormField({
     super.key,
     this.labelText,
     this.isPassword = false,
     this.validator,
+    this.onChanged,
   });
 
   @override
@@ -17,6 +19,7 @@ class AppTextFormField extends StatelessWidget {
     bool? obscureText = isPassword;
     return StatefulBuilder(builder: (context, state) {
       return TextFormField(
+        onChanged: onChanged,
         obscureText: obscureText!,
         decoration: InputDecoration(
           border: const OutlineInputBorder(),

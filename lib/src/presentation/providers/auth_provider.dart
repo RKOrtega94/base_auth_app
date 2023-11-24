@@ -1,15 +1,13 @@
-import 'package:base_auth_app/src/core/_core.dart';
 import 'package:base_auth_app/src/data/use_cases/auth/login_use_case.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_provider.g.dart';
 
 @riverpod
-class AuthProvider extends _$AuthProvider {
+class Auth extends _$Auth {
   @override
-  Stream<String> build() async* {
-    yield await getValue('token');
+  Stream<bool> build() async* {
+    checkAuth();
   }
 
   // Login
@@ -22,4 +20,7 @@ class AuthProvider extends _$AuthProvider {
 
   // Logout
   Future<void> logout() async {}
+
+  // Check Auth
+  Future<void> checkAuth() async {}
 }

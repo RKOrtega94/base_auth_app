@@ -10,13 +10,19 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         AppTextFormField(
           labelText: 'Email',
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your email';
+            }
+            return null;
+          },
         ),
-        SizedBox(height: 10),
-        AppTextFormField(
+        const SizedBox(height: 10),
+        const AppTextFormField(
           labelText: 'Password',
           isPassword: true,
         ),
