@@ -2,7 +2,6 @@ import 'package:base_auth_app/src/core/_core.dart';
 import 'package:base_auth_app/src/data/models/user_model.dart';
 import 'package:base_auth_app/src/domain/data_source/auth_data_source.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class AuthRemoteDataSource implements IAuthDataSource {
   final _api = Api();
