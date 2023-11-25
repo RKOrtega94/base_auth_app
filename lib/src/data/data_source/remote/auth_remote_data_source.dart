@@ -14,8 +14,7 @@ class AuthRemoteDataSource implements IAuthDataSource {
         'nombreUsuario': email,
         'password': password,
       });
-      print("RESPONSE: ${res.data}");
-      final UserModel user = UserModel.fromJson(res.data);
+      final UserModel user = UserModel.fromJson(res.data['usuario']);
       final String token = res.data['token'];
       await setValue('token', token);
       await setValue('user', user.toJson().toString());
@@ -25,9 +24,13 @@ class AuthRemoteDataSource implements IAuthDataSource {
   }
 
   @override
-  Future<void> logout() {
-    // TODO: implement logout
-    throw UnimplementedError();
+  Future<void> logout() async {
+    try {
+      await removeValue('token');
+      await removeValue('user');
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override

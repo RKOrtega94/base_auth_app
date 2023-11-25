@@ -1,10 +1,12 @@
 import 'package:base_auth_app/src/data/inputs/_inputs.dart';
 import 'package:base_auth_app/src/presentation/providers/_providers.dart';
+import 'package:base_auth_app/src/presentation/screens/_screens.dart';
 import 'package:base_auth_app/src/presentation/views/login_view.dart';
 import 'package:base_auth_app/src/presentation/views/register_view.dart';
 import 'package:base_auth_app/src/presentation/widgets/shared/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {
   static String get routeName => '/auth';
@@ -47,8 +49,17 @@ class AuthScreenState extends ConsumerState<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     final auth = ref.watch(authProvider);
+
+    ref.listen(authProvider, (previous, next) {
+      if (next is AsyncData<bool>) {
+        if (next.value) context.go(HomeScreen.routeName);
+      }
+    });
+
     debugPrint(auth.toString());
     if (auth is AsyncLoading) return const CircularProgressIndicator();
+
+    if (auth is AsyncData) {}
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,

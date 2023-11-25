@@ -1,4 +1,3 @@
-import 'package:base_auth_app/src/data/inputs/_inputs.dart';
 import 'package:base_auth_app/src/presentation/widgets/_widgets.dart';
 import 'package:flutter/material.dart';
 
