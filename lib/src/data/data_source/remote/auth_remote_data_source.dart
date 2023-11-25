@@ -34,7 +34,14 @@ class AuthRemoteDataSource implements IAuthDataSource {
 
   @override
   Future<void> register(String userName, String email, String password) {
-    // TODO: implement register
-    throw UnimplementedError();
+    try {
+      return _api.post('auth/nuevo', {
+        'nombreUsuario': userName,
+        'email': email,
+        'password': password,
+      });
+    } catch (e) {
+      rethrow;
+    }
   }
 }

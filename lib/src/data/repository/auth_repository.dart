@@ -17,8 +17,6 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<void> register(String userName, String email, String password) {
-    // TODO: implement register
-    throw UnimplementedError();
-  }
+  Future<void> register(String userName, String email, String password) =>
+      _ds.register(userName, email, password);
 }
