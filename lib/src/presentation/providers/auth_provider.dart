@@ -24,7 +24,7 @@ class Auth extends _$Auth {
   }
 
   // Register
-  Future<void> register(String email, String password) async {}
+  Future<void> register(String name, String email, String password) async {}
 
   // Logout
   Future<void> logout() async {

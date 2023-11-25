@@ -6,12 +6,14 @@ class AppTextFormField extends StatelessWidget {
   final bool? isPassword;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
+  final TextInputType? keyboardType;
   const AppTextFormField({
     super.key,
     this.labelText,
     this.isPassword = false,
     this.validator,
     this.onChanged,
+    this.keyboardType,
   });
 
   @override
@@ -21,6 +23,7 @@ class AppTextFormField extends StatelessWidget {
       return TextFormField(
         onChanged: onChanged,
         obscureText: obscureText!,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
           border: const OutlineInputBorder(),
           labelText: labelText,

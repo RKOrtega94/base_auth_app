@@ -25,6 +25,7 @@ class AuthScreenState extends ConsumerState<AuthScreen> {
   EmailInput emailInput = const EmailInput.pure();
   UserNameInput userNameInput = const UserNameInput.pure();
   PasswordInput passwordInput = const PasswordInput.pure();
+  PasswordInput confirmPasswordInput = const PasswordInput.pure();
 
   handleAuth() async {
     if (_formKey.currentState!.validate()) {
@@ -35,7 +36,11 @@ class AuthScreenState extends ConsumerState<AuthScreen> {
               passwordInput.value,
             );
       } else {
-        // await context.read<RegisterUseCase>().call(email, password);
+        ref.read(authProvider.notifier).register(
+              userNameInput.value,
+              emailInput.value,
+              passwordInput.value,
+            );
       }
     }
   }
@@ -100,7 +105,35 @@ class AuthScreenState extends ConsumerState<AuthScreen> {
                       },
                     )
                   else
-                    const RegisterView(),
+                    RegisterView(
+                      userNameChange: (value) => setState(
+                          () => userNameInput = UserNameInput.dirty(value)),
+                      emailChange: (value) =>
+                          setState(() => emailInput = EmailInput.dirty(value)),
+                      passwordChange: (value) => setState(
+                          () => passwordInput = PasswordInput.dirty(value)),
+                      confirmPasswordChange: (value) => setState(() =>
+                          confirmPasswordInput = PasswordInput.dirty(value)),
+                      userNameValidator: (_) {
+                        if (userNameInput.error == null) return null;
+                        return userNameInput.getErrorString();
+                      },
+                      emailValidator: (_) {
+                        if (emailInput.error == null) return null;
+                        return emailInput.getErrorString();
+                      },
+                      passwordValidator: (_) {
+                        if (passwordInput.error == null) return null;
+                        return passwordInput.getErrorString();
+                      },
+                      confirmPasswordValidator: (_) {
+                        if (confirmPasswordInput.error == null) return null;
+                        if (passwordInput.value != confirmPasswordInput.value) {
+                          return 'Las contraseñas no coinciden';
+                        }
+                        return confirmPasswordInput.getErrorString();
+                      },
+                    ),
                   const SizedBox(height: 10),
                   SizedBox(
                     width: double.infinity,
