@@ -2,15 +2,30 @@
 
 This is a base auth app with REST api using JWT and riverpod. Clean architecture
 
+<!-- Tabla de contenido -->
+
+## Table of Contents
+
+- [About the Project](#about-the-project)
+- [Getting Started](#getting-started)
+
+<!-- About the project -->
+
+## About The Project
+
+This is a base auth app with REST api using JWT and riverpod. Clean architecture.
+
+### Librares used
+
+<!-- create a link with image from https://riverpod.dev/img/logo.png -->
+
+- ![Your Image](https://riverpod.dev/img/logo.png){width=300 height=200}
+  [Riverpod](https://riverpod.dev/) - State management
+
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### 1. Clone the repo
 
-A few resources to get you started if this is your first Flutter project:
+```sh
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
