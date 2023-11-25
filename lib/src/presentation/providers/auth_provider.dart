@@ -1,5 +1,6 @@
 import 'package:base_auth_app/src/core/_core.dart';
 import 'package:base_auth_app/src/data/use_cases/auth/login_use_case.dart';
+import 'package:base_auth_app/src/data/use_cases/auth/register_use_case.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_provider.g.dart';
@@ -24,7 +25,9 @@ class Auth extends _$Auth {
   }
 
   // Register
-  Future<void> register(String name, String email, String password) async {}
+  Future<void> register(String name, String email, String password) async {
+    await RegisterUseCase().call(name, email, password);
+  }
 
   // Logout
   Future<void> logout() async {

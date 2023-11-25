@@ -36,11 +36,25 @@ class AuthScreenState extends ConsumerState<AuthScreen> {
               passwordInput.value,
             );
       } else {
-        ref.read(authProvider.notifier).register(
-              userNameInput.value,
-              emailInput.value,
-              passwordInput.value,
-            );
+        try {
+          ref.read(authProvider.notifier).register(
+                userNameInput.value,
+                emailInput.value,
+                passwordInput.value,
+              );
+          setState(() => isLogin = !isLogin);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Usuario registrado correctamente'),
+            ),
+          );
+        } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(e.toString()),
+            ),
+          );
+        }
       }
     }
   }
