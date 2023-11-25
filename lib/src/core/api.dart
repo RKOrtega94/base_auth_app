@@ -51,6 +51,8 @@ class Api {
   /// });
   /// ```
   Future<Response> post(String path, Map<String, dynamic> data) async {
+    print(_headers.toString());
+    print(data.toString());
     return await _dio.post(path,
         data: data, options: Options(headers: _headers));
   }

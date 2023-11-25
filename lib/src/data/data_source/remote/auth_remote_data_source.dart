@@ -9,7 +9,7 @@ class AuthRemoteDataSource implements IAuthDataSource {
   Future<String> login(String email, String password) async {
     try {
       final Response res = await _api.post('login', {
-        'email': email,
+        'nombreUsuario': email,
         'password': password,
       });
       final data = res.data as Map<String, dynamic>;

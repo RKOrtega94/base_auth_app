@@ -1,11 +1,18 @@
+import 'package:base_auth_app/src/data/inputs/_inputs.dart';
 import 'package:base_auth_app/src/presentation/widgets/_widgets.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatelessWidget {
-  final Function(String email, String password) onLogin;
+  final void Function(String) userNameChange;
+  final void Function(String) passwordChange;
+  final String? Function(String?) userNameValidator;
+  final String? Function(String?) passwordValidator;
   const LoginView({
     super.key,
-    required this.onLogin,
+    required this.userNameChange,
+    required this.passwordChange,
+    required this.userNameValidator,
+    required this.passwordValidator,
   });
 
   @override
@@ -13,18 +20,16 @@ class LoginView extends StatelessWidget {
     return Column(
       children: [
         AppTextFormField(
-          labelText: 'Email',
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter your email';
-            }
-            return null;
-          },
+          labelText: 'User name',
+          onChanged: userNameChange,
+          validator: userNameValidator,
         ),
         const SizedBox(height: 10),
-        const AppTextFormField(
+        AppTextFormField(
           labelText: 'Password',
+          onChanged: passwordChange,
           isPassword: true,
+          validator: passwordValidator,
         ),
       ],
     );

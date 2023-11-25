@@ -8,11 +8,13 @@ class Auth extends _$Auth {
   @override
   Stream<bool> build() async* {
     checkAuth();
+    String token = 'token';
+    yield false;
   }
 
   // Login
-  Future<void> login(String email, String password) async {
-    await LoginUseCase().call(email, password);
+  Future<void> login(String userName, String password) async {
+    await LoginUseCase().call(userName, password);
   }
 
   // Register

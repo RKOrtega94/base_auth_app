@@ -1,3 +1,4 @@
+import 'package:base_auth_app/src/data/inputs/_inputs.dart';
 import 'package:base_auth_app/src/presentation/providers/_providers.dart';
 import 'package:base_auth_app/src/presentation/views/login_view.dart';
 import 'package:base_auth_app/src/presentation/views/register_view.dart';
@@ -19,21 +20,18 @@ class AuthScreenState extends ConsumerState<AuthScreen> {
   bool isLogin = true;
   final _formKey = GlobalKey<FormState>();
 
-  final authData = {
-    'userName': '',
-    'email': '',
-    'password': '',
-  };
+  EmailInput emailInput = const EmailInput.pure();
+  UserNameInput userNameInput = const UserNameInput.pure();
+  PasswordInput passwordInput = const PasswordInput.pure();
 
-  handleAuth({
-    String? name,
-    String? email,
-    String? password,
-  }) async {
+  handleAuth() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       if (isLogin) {
-        ref.read(authProvider.notifier).login(email!, password!);
+        ref.read(authProvider.notifier).login(
+              userNameInput.value,
+              passwordInput.value,
+            );
       } else {
         // await context.read<RegisterUseCase>().call(email, password);
       }
@@ -49,6 +47,7 @@ class AuthScreenState extends ConsumerState<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     final auth = ref.watch(authProvider);
+    debugPrint(auth.toString());
     if (auth is AsyncLoading) return const CircularProgressIndicator();
 
     return Scaffold(
@@ -76,10 +75,18 @@ class AuthScreenState extends ConsumerState<AuthScreen> {
                   ),
                   if (isLogin)
                     LoginView(
-                      onLogin: (email, password) => handleAuth(
-                        email: email,
-                        password: password,
-                      ),
+                      userNameChange: (value) => setState(
+                          () => userNameInput = UserNameInput.dirty(value)),
+                      passwordChange: (value) => setState(
+                          () => passwordInput = PasswordInput.dirty(value)),
+                      userNameValidator: (_) {
+                        if (userNameInput.error == null) return null;
+                        return userNameInput.getErrorString();
+                      },
+                      passwordValidator: (_) {
+                        if (passwordInput.error == null) return null;
+                        return passwordInput.getErrorString();
+                      },
                     )
                   else
                     const RegisterView(),
