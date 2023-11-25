@@ -7,6 +7,5 @@ class LoginUseCase implements ILoginUseCase {
     AuthRemoteDataSource(),
   );
   @override
-  Future<String> call(String email, String password) =>
-      _repo.login(email, password);
+  Future call(String email, String password) => _repo.login(email, password);
 }

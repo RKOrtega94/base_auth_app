@@ -7,13 +7,18 @@ class AuthRepository implements IAuthRepository {
   AuthRepository(this._ds);
 
   @override
-  Future<String> login(String email, String password) =>
-      _ds.login(email, password);
+  Future<void> login(String userName, String password) =>
+      _ds.login(userName, password);
 
   @override
-  Future<void> logout() => _ds.logout();
+  Future<void> logout() {
+    // TODO: implement logout
+    throw UnimplementedError();
+  }
 
   @override
-  Future<String> register(String userName, String email, String password) =>
-      _ds.register(userName, email, password);
+  Future<void> register(String userName, String email, String password) {
+    // TODO: implement register
+    throw UnimplementedError();
+  }
 }
